@@ -4,7 +4,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 export const getNowPlayingMovies = async () => {
   const res = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
   const data = await res.json();
-  return data.results;
+  return data;
 };
 
 export const getImageUrl = (path, size = 'w500') => {
@@ -24,7 +24,7 @@ export const getMovieVideos = async (movieId) => {
 export const getNowPlayingTVShows = async () => {
   const res = await fetch(`${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=1`);
   const data = await res.json();
-  return data.results;
+  return data;
 };
 
 export const searchMovies = async (query) => {

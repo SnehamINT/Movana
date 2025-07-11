@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 const LandingPage = () => {
   const [items, setItems] = useState([]); // movies or tv shows
   const [loading, setLoading] = useState(true);
+  const [totalResults, setToalResults] =useState('')
   const [featured, setFeatured] = useState({});
   const [type, setType] = useState('movie'); // 'movie' or 'tv'
   const [searchOpen, setSearchOpen] = useState(false);
@@ -23,15 +24,21 @@ const LandingPage = () => {
       setNoResult(false);
       setLoading(true);
       const fetchData = async () => {
+        let allData = [];
         let data = [];
         if (type === 'movie') {
-          data = await getNowPlayingMovies();
+          allData = await getNowPlayingMovies()
+          data = allData?.results;
+          setToalResults(allData?.total_results)
         } else {
-          data = await getNowPlayingTVShows();
+          allData = await getNowPlayingTVShows()
+          data = allData?.results;
+          setToalResults(allData?.total_results)
         }
         setItems(data);
         setFeatured(data[0] || {});
         setLoading(false);
+        // console.log(allData);
       };
       fetchData();
       return;
@@ -95,7 +102,7 @@ const LandingPage = () => {
         {error && <div className="text-red-400 text-center mt-4">{error}</div>}
         {noResult && <div className="text-gray-400 text-center mt-4">No results found.</div>}
         <Hero featured={featured} />
-        <MovieSlider movies={items} loading={loading} setFeatured={setFeatured} />
+        <MovieSlider movies={items} loading={loading} setFeatured={setFeatured} totalContent={totalResults}  />
       </div>
     </div>
   );

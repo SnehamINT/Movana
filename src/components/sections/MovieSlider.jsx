@@ -96,9 +96,13 @@ var settings = {
     }
   ]
 };
-const MovieSlider = ({ movies, loading, setFeatured }) => (
+const MovieSlider = ({ movies, loading, setFeatured, totalContent }) => (
   
     <div className="slider_area">
+      {/* <div className='text-sm mb-3 ps-4'>
+        Showing 20 out of {totalContent} 
+        <button className='btn btn-sm btn-link p-0 ms-1 uppercase text-green-400'>View all</button>
+      </div> */}
       <Slider {...settings}>
       {loading
           ? Array.from({ length: 8 }).map((_, i) => (
