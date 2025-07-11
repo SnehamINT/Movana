@@ -115,7 +115,7 @@ const MovieSlider = ({ movies, loading, setFeatured }) => (
                 />
               </div>
                 <div className="p-2  w-full">
-                  <h2 className="font-semibold text-xs line-clamp-2">{movie.title}</h2>
+                  <h2 className="font-semibold text-xs line-clamp-2">{movie.title ? movie?.title : movie?.name}</h2>
                 </div>
               </div>
             ))
