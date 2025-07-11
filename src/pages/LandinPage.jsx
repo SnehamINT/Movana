@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { getNowPlayingMovies, getNowPlayingTVShows, searchMovies, searchTVShows } from '../api/tmdb';
-import { Skeleton } from "@/components/ui/skeleton";
 
 import Header from '../components/sections/Header';
 import Hero from '../components/sections/Hero';
