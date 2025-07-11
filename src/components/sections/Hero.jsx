@@ -96,7 +96,7 @@ const Hero = ({ featured }) => {
           style={{ minHeight: '100vh' }}
         />
       )}
-      <div className="relative z-20 p-8 max-w-2xl">
+      <div className="relative z-20 p-8 max-w-2xl w-full">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 tracking-wide truncate">{featured?.title || featured?.name}</h1>
         {/* <p className="text-lg mb-2 font-semibold">Season 1</p> */}
         <div className="flex items-center gap-2 mb-2">
