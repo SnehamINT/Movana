@@ -100,6 +100,17 @@ body {
   padding-top: 100px;
 }
 
+button.slick-arrow.slick-prev {
+  top: -25px;
+  right: 50px;
+  left: unset;
+}
+button.slick-arrow.slick-next {
+  top: -25px;
+  right: 20px;
+  left: unset;
+}
+
 @media only screen and (max-width: 450px){
   .slider_img, .slider_img img {
     width: 30vw;
@@ -114,7 +125,7 @@ body {
   .slider_area {
     position: static;
     overflow: hidden;
-    height: 350px;
-    padding-top: 30px;
+    height: 370px;
+    padding-top: 50px;
   }
 }
