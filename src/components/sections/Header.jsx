@@ -16,7 +16,7 @@ const Header = ({ type = 'movie', onNavClick = () => {}, onSearchClick = () => {
                 {/* <li><a>Movies</a></li> */}
             </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Movana</a>
+            <a className="btn btn-ghost text-xl logo_txt" href="/">Movana</a>
         </div>
         <div className="navbar-center hidden lg:block">
         <nav className="flex gap-8 text-lg font-medium">

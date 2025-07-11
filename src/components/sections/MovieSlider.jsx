@@ -15,9 +15,9 @@ var settings = {
   centerMode: true,
   autoplay: true,
   autoplaySpeed: 5000,  
-  draggable: false,    // Disable mouse dragging
-  swipe: false,        // Disable touch swiping
-  touchMove: false,    // Prevents touch dragging
+  draggable: false,   
+  swipe: false,       
+  touchMove: false,    
   responsive: [
     {
       breakpoint: 2000,

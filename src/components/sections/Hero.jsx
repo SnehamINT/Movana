@@ -101,10 +101,13 @@ const Hero = ({ featured }) => {
         {/* <p className="text-lg mb-2 font-semibold">Season 1</p> */}
         <div className="flex items-center gap-2 mb-2">
           <div className="flex text-yellow-400">
-            {Array.from({ length: 4 }).map((_, i) => <FaStar key={i} />)}
-            <FaStar className="text-gray-500" />
+            {Array.from({ length: 5 }).map((_, i) =>
+              i < Math.round((featured?.vote_average || 0) / 2)
+                ? <FaStar key={i} />
+                : <FaStar key={i} className="text-gray-500" />
+            )}
           </div>
-          <span className="ml-2 text-white font-medium">4.0</span>
+          <span className="ml-2 text-white font-medium">{((featured?.vote_average || 0) / 2).toFixed(1)}</span>
         </div>
         {/* <div className="flex gap-4 mb-4">
           {genres.map((g) => (
