@@ -27,16 +27,18 @@ export const getNowPlayingTVShows = async () => {
   return data;
 };
 
-export const searchMovies = async (query) => {
-  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}`);
+export const searchMovies = async (query, page= 1) => {
+  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`);
   if (!res.ok) throw new Error('Failed to search movies');
   const data = await res.json();
-  return data.results;
+  return data;
 };
 
-export const searchTVShows = async (query) => {
-  const res = await fetch(`${BASE_URL}/search/tv?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}`);
+export const searchTVShows = async (query, page = 1) => {
+  const res = await fetch(`${BASE_URL}/search/tv?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`);
   if (!res.ok) throw new Error('Failed to search TV shows');
   const data = await res.json();
-  return data.results;
+  return data;
 };
+
+

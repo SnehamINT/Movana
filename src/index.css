@@ -37,7 +37,7 @@ body {
   width: 100%;
   bottom: 0;
   z-index: 1000;
-  height: 320px;
+  height: 360px;
 }
 
 .slider_img {
@@ -117,7 +117,7 @@ button.slick-arrow.slick-next {
     height: 38vw;
   }
   .slider_area {
-    height: 55vw;
+    height: 60vw;
   }
 }
 
@@ -125,7 +125,7 @@ button.slick-arrow.slick-next {
   .slider_area {
     position: static;
     overflow: hidden;
-    height: 370px;
-    padding-top: 50px;
+    height: 380px;
+    padding-top: 20px;
   }
 }

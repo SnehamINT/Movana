@@ -4,6 +4,7 @@ import { Skeleton } from '../ui/Skeleton';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useNavigate } from 'react-router-dom';
 var settings = {
   dots: false,
   arrows: true,
@@ -96,36 +97,45 @@ var settings = {
     }
   ]
 };
-const MovieSlider = ({ movies, loading, setFeatured, totalContent }) => (
-  
+const MovieSlider = ({ movies, loading, setFeatured, totalContent, mediaType }) => {
+  const navigate = useNavigate(); 
+
+  return (
     <div className="slider_area">
-      {/* <div className='text-sm mb-3 ps-4'>
+      <div className='text-sm mb-3 ps-4'>
         Showing 20 out of {totalContent} 
-        <button className='btn btn-sm btn-link p-0 ms-1 uppercase text-green-400'>View all</button>
-      </div> */}
+        <button
+          className='btn btn-sm btn-link p-0 ms-1 uppercase text-green-400'
+          onClick={() => navigate(`/${mediaType}/all`)}
+        >
+          View all
+        </button>
+      </div>
       <Slider {...settings}>
-      {loading
+        {loading
           ? Array.from({ length: 8 }).map((_, i) => (
               <Skeleton key={i} className="h-56 rounded-xl" />
             ))
-          : 
-          movies.map((movie) => (
-            <div key={movie.id} className='slider_block' onClick={() => setFeatured(movie)}>
-              <div  className="bg-gray-900 text-white shadow-md slider_img">
-                <img
-                  src={getImageUrl(movie.poster_path)}
-                  alt={movie.title}
-                  className=" object-cover w-full "
-                />
-              </div>
-                <div className="p-2  w-full">
-                  <h2 className="font-semibold text-xs line-clamp-2">{movie.title ? movie?.title : movie?.name}</h2>
+          : movies.map((movie) => (
+              <div key={movie.id} className='slider_block' onClick={() => setFeatured(movie)}>
+                <div className="bg-gray-900 text-white shadow-md slider_img">
+                  <img
+                    src={getImageUrl(movie.poster_path)}
+                    alt={movie.title}
+                    className="object-cover w-full"
+                  />
+                </div>
+                <div className="p-2 w-full">
+                  <h2 className="font-semibold text-xs line-clamp-2">
+                    {movie.title || movie.name}
+                  </h2>
                 </div>
               </div>
-            ))
-          }
+            ))}
       </Slider>
     </div>
   );
+};
+
 
 export default MovieSlider

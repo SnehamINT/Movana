@@ -1,7 +1,54 @@
-import React from 'react'
+import React, { useState,useEffect, useRef } from 'react'
+import { IoClose } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-const Header = ({ type = 'movie', onNavClick = () => {}, onSearchClick = () => {} }) => {
+const Header = ({ type = 'movie', onNavClick = () => {} }) => {
+    const { query } = useParams();
+    const cleanedQuery = query?.length > 0 && query?.replace(/-/g, ' '); 
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState();
+    console.log(cleanedQuery)
+
+    useEffect(()=> {
+        if(cleanedQuery){
+            setSearchTerm(cleanedQuery);
+            setSearchOpen(true);
+        }
+    },[cleanedQuery])
+
+    const searchTimeout = useRef(null);
+
+    
+    const onSearchClick = () => {
+        setSearchOpen((open) => !open);
+        setSearchTerm('');
+    };const navigate = useNavigate();
+
+    // const handleSearchSubmit = (e) => {
+    //   e.preventDefault();
+    //   if (searchTerm.trim()) {
+    //     navigate(`/search/${type}/${encodeURIComponent(searchTerm.trim())}`);
+    //   }
+    // };
+
+    const handleSetSearchTerm = (e) => {
+         setSearchTerm(e.target.value);
+    }
+
+    useEffect(() => {
+        if (searchTimeout.current) clearTimeout(searchTimeout.current);
+        searchTimeout.current = setTimeout(async () => {
+            // handleSearchSubmit()
+            if(searchTerm.trim().length > 0){
+                const formattedSearch = searchTerm.trim().replace(/\s+/g, '-').toLowerCase();
+                navigate(`/search/${type}/${formattedSearch}`);
+            }
+        }, 500);
+        return () => clearTimeout(searchTimeout.current);
+      }, [searchTerm]);
   return (
+    <>
     <header className="navbar header bg-base-100/60 backdrop-blur-md shadow-sm">
         <div className="navbar-start">
             <div className="dropdown lg:hidden">
@@ -53,6 +100,33 @@ const Header = ({ type = 'movie', onNavClick = () => {}, onSearchClick = () => {
             </div> */}
         </div>
     </header>
+    {searchOpen && (
+        <form className="fixed left-0 w-full search_bar">
+        <input
+          type="text"
+          className="input w-full text-black bg-base-100/60 backdrop-blur-md shadow-lg"
+          placeholder={`Search for ${type === 'movie' ? 'movies' : 'TV shows'}...`}
+          value={searchTerm}
+        //   defaultValue={cleanedQuery}
+          onChange={handleSetSearchTerm}
+          autoFocus
+        />
+        <button type="button" 
+        onClick={() => {
+            setSearchTerm('');
+            setSearchOpen(false);
+            setTimeout(() => {
+                if(window.location.pathname.includes('search')){
+                    navigate('/');
+                }
+            }, 100);
+          }}
+        >
+            <IoClose />
+        </button>
+      </form>
+      )}
+    </>
   )
 }
 
