@@ -46,11 +46,6 @@ const SearchResultsPage = () => {
   }
 
 
-  
-
-  console.log(results)
-
-
   return (
     <div className="relative min-h-screen bg-black text-white">
       {results[0] && (

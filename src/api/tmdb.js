@@ -1,8 +1,8 @@
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export const getNowPlayingMovies = async () => {
-  const res = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+export const getNowPlayingMovies = async (page = 1) => {
+  const res = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`);
   const data = await res.json();
   return data;
 };
@@ -21,8 +21,8 @@ export const getMovieVideos = async (movieId) => {
   return data.results;
 };
 
-export const getNowPlayingTVShows = async () => {
-  const res = await fetch(`${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=1`);
+export const getNowPlayingTVShows = async (page=1) => {
+  const res = await fetch(`${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=${page}`);
   const data = await res.json();
   return data;
 };

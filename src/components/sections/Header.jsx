@@ -8,7 +8,7 @@ const Header = ({ type = 'movie', onNavClick = () => {} }) => {
     const cleanedQuery = query?.length > 0 && query?.replace(/-/g, ' '); 
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState();
-    console.log(cleanedQuery)
+
 
     useEffect(()=> {
         if(cleanedQuery){
@@ -36,11 +36,20 @@ const Header = ({ type = 'movie', onNavClick = () => {} }) => {
          setSearchTerm(e.target.value);
     }
 
+    
+
+    const handleNavClick = (newType) => {
+        if (newType !== type) {
+          setType(newType);
+          setSearchTerm('');
+        }
+      };
+
     useEffect(() => {
         if (searchTimeout.current) clearTimeout(searchTimeout.current);
         searchTimeout.current = setTimeout(async () => {
             // handleSearchSubmit()
-            if(searchTerm.trim().length > 0){
+            if(searchTerm?.trim().length > 0){
                 const formattedSearch = searchTerm.trim().replace(/\s+/g, '-').toLowerCase();
                 navigate(`/search/${type}/${formattedSearch}`);
             }
@@ -117,7 +126,7 @@ const Header = ({ type = 'movie', onNavClick = () => {} }) => {
             setSearchOpen(false);
             setTimeout(() => {
                 if(window.location.pathname.includes('search')){
-                    navigate('/');
+                    navigate(`/${type}/all`);
                 }
             }, 100);
           }}

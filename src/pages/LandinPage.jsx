@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { getNowPlayingMovies, getNowPlayingTVShows, searchMovies, searchTVShows } from '../api/tmdb';
+import { getNowPlayingMovies, getNowPlayingTVShows } from '../api/tmdb';
 
 import Header from '../components/sections/Header';
 import Hero from '../components/sections/Hero';
@@ -47,7 +47,7 @@ const LandingPage = () => {
   const handleNavClick = (newType) => {
     if (newType !== type) {
       setType(newType);
-      setSearchTerm('');
+      // setSearchTerm('');
     }
   };
 
