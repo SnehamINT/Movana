@@ -42,3 +42,19 @@ export const searchTVShows = async (query, page = 1) => {
 };
 
 
+export const getDetailsById = async (type, id) => {
+  if (!['movie', 'tv'].includes(type)) {
+    throw new Error('Invalid media type. Must be "movie" or "tv"');
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/${type}/${id}?api_key=${API_KEY}&language=en-US`);
+    if (!response.ok) throw new Error('Failed to fetch content details');
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(`Error fetching ${type} details with ID ${id}:`, err);
+    throw err;
+  }
+};
+

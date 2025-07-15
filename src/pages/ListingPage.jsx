@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/sections/Header';
 import { getNowPlayingMovies, getNowPlayingTVShows } from '../api/tmdb';
 
@@ -13,6 +13,7 @@ const ListingPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
   const [type, setType] = useState(mediaType ? mediaType : 'movie');
+  const navigate = useNavigate();
   const fetchResults = async () => {
     setLoading(true);
     const data =
@@ -74,7 +75,7 @@ const ListingPage = () => {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {results.map((item) => (
-                <div key={item.id} className="bg-base-200 rounded-xl shadow p-2">
+                <div key={item.id} className="bg-base-200 rounded-xl shadow p-2 cursor-pointer" onClick={() => navigate(`/${type}/details/${item.id}`)}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                     alt={item.title || item.name}
@@ -83,6 +84,7 @@ const ListingPage = () => {
                   <h2 className="text-sm font-medium line-clamp-2">
                     {item.title || item.name}
                   </h2>
+                  {/* <h2>{item.id}</h2> */}
                 </div>
               ))}
             </div>
