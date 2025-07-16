@@ -58,3 +58,20 @@ export const getDetailsById = async (type, id) => {
   }
 };
 
+export const getCredits = async (type, id) => {
+  if (!['movie', 'tv'].includes(type)) {
+    throw new Error('Invalid media type. Must be "movie" or "tv"');
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/${type}/${id}/credits?api_key=${API_KEY}&language=en-US`);
+    if (!response.ok) throw new Error('Failed to fetch credits');
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(`Error fetching ${type} credits with ID ${id}:`, err);
+    throw err;
+  }
+};
+
+

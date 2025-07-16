@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/sections/Header';
 import { searchMovies, searchTVShows } from '../api/tmdb';
 
@@ -45,6 +45,8 @@ const SearchResultsPage = () => {
     setCurrentPage(plus);
   }
 
+  const navigate = useNavigate();
+
 
   return (
     <div className="relative min-h-screen bg-black text-white">
@@ -75,7 +77,7 @@ const SearchResultsPage = () => {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {results.map((item) => (
-                <div key={item.id} className="bg-base-200 rounded-xl shadow p-2">
+                <div key={item.id} className="bg-base-200 rounded-xl shadow p-2 cursor-pointer" onClick={() => navigate(`/${type}/details/${item.id}`)}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                     alt={item.title || item.name}
