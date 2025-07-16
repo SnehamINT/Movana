@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { getBannerImageUrl, getMovieVideos } from '../../api/tmdb';
 import { FaSearch, FaPlay, FaPause, FaPlus, FaStar } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 const genres = ["Crime", "Drama", "Mystery"];
 
 const Hero = ({ featured }) => {
@@ -9,6 +11,8 @@ const Hero = ({ featured }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [showNoVideoModal, setShowNoVideoModal] = useState(false);
   const iframeRef = useRef(null);
+
+  const type = localStorage.getItem('type');
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -78,6 +82,8 @@ const Hero = ({ featured }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <section
       className="relative flex flex-col py-15 md:flex-row items-start  bg-cover bg-center overflow-hidden hero_baner"
@@ -117,7 +123,7 @@ const Hero = ({ featured }) => {
         <div className="flex gap-4 my-4">
           {!showVideo && (
             <button
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-semibold text-lg shadow"
+              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-sm font-semibold text-sm shadow"
               onClick={handlePlay}
             >
               <FaPlay /> Play
@@ -125,7 +131,7 @@ const Hero = ({ featured }) => {
           )}
           {showVideo && !isPaused && (
             <button
-              className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-lg font-semibold text-lg shadow"
+              className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-sm font-semibold text-sm shadow"
               onClick={handlePause}
             >
               <FaPause /> Pause
@@ -133,16 +139,19 @@ const Hero = ({ featured }) => {
           )}
           {showVideo && isPaused && (
             <button
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-semibold text-lg shadow"
+              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-sm font-semibold text-sm shadow"
               onClick={handleResume}
             >
               <FaPlay /> Resume
             </button>
           )}
 
-          {/* <button className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-lg font-semibold text-lg shadow">
-            <FaPlus />
-          </button> */}
+          <button 
+          className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-sm font-semibold text-sm shadow cursor-pointer"
+          onClick={() => navigate(`/${type}/details/${featured.id}`)}
+          >
+            <FaEye /> View more
+          </button>
 
         </div>
         <p className="text-gray-300 max-w-xl text-sm md:text-base line-clamp-2">

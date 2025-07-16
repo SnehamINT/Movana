@@ -56,6 +56,10 @@ const Header = ({ type = 'movie', onNavClick = () => {} }) => {
         }, 500);
         return () => clearTimeout(searchTimeout.current);
       }, [searchTerm]);
+
+      useEffect(()=>{
+        localStorage.setItem('type', type)
+      },[onNavClick])
   return (
     <>
     <header className="navbar header bg-base-100/60 backdrop-blur-md shadow-sm">

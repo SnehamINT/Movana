@@ -5,6 +5,7 @@ import { FaPlay, FaDesktop, FaStar } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../components/sections/Header';
 import CastSlider from '../components/sections/CastSlider';
+import CrewSlider from '../components/sections/CrewSlider';
 
 
 const ContentDetails = () => {
@@ -53,8 +54,8 @@ const ContentDetails = () => {
     if (!details) return <div>Loading...</div>;
   return (
     <>
-    <div className="min-h-screen bg-gradient-to-b from-[#25053f] to-[#123b4f] text-white p-6">
-        <div className='flex flex-wrap gap-2 mb-5'>
+    <div className="min-h-screen bg-gradient-to-b from-[#25053f] to-[#123b4f] text-white py-6">
+        <div className='flex flex-wrap gap-2 mb-5 px-6'>
             <div className="breadcrumbs text-sm me-auto">
             <ul>
                 <li><Link to={`/`}>Home</Link></li>
@@ -65,7 +66,7 @@ const ContentDetails = () => {
             <Link className="text-xl logo_txt ps-0 text-white" to="/">Movana</Link>
         </div>
       {/* Main Details Section */}
-      <div className="flex flex-col md:flex-row gap-8 items-start lg:items-start">
+      <div className="flex flex-col md:flex-row gap-8 items-start lg:items-start px-6">
         {/* Left Info */}
         <div className="flex-1">
           <div className="text-3xl font-bold"> {details?.title ? details?.title : details?.name}</div>
@@ -172,7 +173,12 @@ const ContentDetails = () => {
       </div>
 
       {/* Cast Section */}
-      <CastSlider cast={cast?.cast || []} />
+      {cast?.cast.length > 0 && 
+        <CastSlider cast={cast?.cast || []} />
+      }
+      {cast?.crew.length > 0 && 
+        <CrewSlider cast={cast?.crew || []} />
+      }
 
       {/* <div className="mt-12">
         <h2 className="text-xl font-semibold mb-4">Cast</h2>

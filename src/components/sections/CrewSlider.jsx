@@ -7,20 +7,20 @@ import { IoMdArrowRoundForward } from "react-icons/io";
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const CastSlider = ({ cast }) => {
+const CrewSlider = ({ cast }) => {
   return (
-    <div className="mt-12 bg-white/20 px-6 pt-4 pb-7">
+    <div className="mt-12 px-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Cast</h2>
+        <h2 className="text-xl font-semibold">Crew</h2>
         <div className="flex gap-2">
           <button
-            className="cast-prev p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
+            className="cast-prev2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
             aria-label="Previous"
           >
             <FaChevronLeft />
           </button>
           <button
-            className="cast-next p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
+            className="cast-next2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
             aria-label="Next"
           >
             <FaChevronRight />
@@ -31,8 +31,8 @@ const CastSlider = ({ cast }) => {
         <Swiper
           modules={[Navigation]}
           navigation={{
-            nextEl: '.cast-next',
-            prevEl: '.cast-prev',
+            nextEl: '.cast-next2',
+            prevEl: '.cast-prev2',
           }}
           spaceBetween={20}
           slidesOffsetBefore={0}
@@ -87,4 +87,4 @@ const CastSlider = ({ cast }) => {
   );
 };
 
-export default CastSlider;
+export default CrewSlider;
