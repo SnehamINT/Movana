@@ -6,8 +6,10 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { IoMdArrowRoundForward } from "react-icons/io";
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useNavigate } from 'react-router-dom';
 
 const CastSlider = ({ cast }) => {
+  const navigate = useNavigate();
   return (
     <div className="mt-12 bg-white/20 px-6 pt-4 pb-7">
       <div className="flex items-center justify-between mb-4">
@@ -39,26 +41,22 @@ const CastSlider = ({ cast }) => {
           slidesOffsetAfter={0}
           breakpoints={{
             320: {
-              slidesPerView: 2,
-              // slidesOffsetBefore: 30,
+              slidesPerView: cast.length < 2 ? cast.length : 2,
             },
             640: {
-              slidesPerView: 3,
-              // slidesOffsetBefore: 40,
+              slidesPerView: cast.length < 3 ? cast.length : 3,
             },
             768: {
-              slidesPerView: 4,
-              // slidesOffsetBefore: 50
+              slidesPerView: cast.length < 4 ? cast.length : 4,
             },
             1024: {
-              slidesPerView: 6,
-              // slidesOffsetBefore: 60,
+              slidesPerView: cast.length < 6 ? cast.length : 6,
             },
           }}
         >
           {cast?.map((person) => (
             <SwiperSlide key={person.id}>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center cursor-pointer" onClick={()=>navigate(`/person/details/${person?.id}`)}>
                 <div className="w-30 h-30 md:w-40 md:h-40 rounded-full overflow-hidden mb-2 border-2 border-white shadow">
                   {person.profile_path ? (
                     <img

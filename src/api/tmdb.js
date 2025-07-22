@@ -75,3 +75,43 @@ export const getCredits = async (type, id) => {
 };
 
 
+export const getPersonDetailsById = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/person/${id}?api_key=${API_KEY}`);
+    if (!response.ok) throw new Error('Failed to fetch content details');
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(`Error fetching ${type} details with ID ${id}:`, err);
+    throw err;
+  }
+};
+
+
+export const getPersonDetailsWithKnownFor = async (id) => {
+  try {
+    // Fetch person details
+    const personRes = await fetch(`${BASE_URL}/person/${id}?api_key=${API_KEY}`);
+    if (!personRes.ok) throw new Error('Failed to fetch person details');
+    const personData = await personRes.json();
+
+    // Fetch combined credits
+    const creditsRes = await fetch(`${BASE_URL}/person/${id}/combined_credits?api_key=${API_KEY}`);
+    if (!creditsRes.ok) throw new Error('Failed to fetch person credits');
+    const creditsData = await creditsRes.json();
+
+    // Sort credits by popularity to get top 5 "known for"
+    const knownFor = creditsData.cast
+      .sort((a, b) => b.popularity - a.popularity)
+      .slice(0, 5); // Top 5 known for
+
+    return {
+      ...personData,
+      knownFor
+    };
+  } catch (err) {
+    console.error(`Error fetching person details or known for with ID ${id}:`, err);
+    throw err;
+  }
+};
+

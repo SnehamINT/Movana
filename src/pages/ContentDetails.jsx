@@ -72,7 +72,7 @@ const ContentDetails = () => {
           <div className="text-3xl font-bold"> {details?.title ? details?.title : details?.name}</div>
           <small></small>
           <div className="flex items-center gap-2 ">
-          ({details?.release_date?.split('-')[0]})
+          {details?.release_date && <>({details?.release_date?.split('-')[0]})</>}
           <div className="flex text-yellow-400">
             {Array.from({ length: 5 }).map((_, i) =>
               i < Math.round((details?.vote_average || 0) / 2)

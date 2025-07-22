@@ -1,4 +1,4 @@
-// CastSlider.jsx
+// knownForSlider.jsx
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -6,21 +6,24 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { IoMdArrowRoundForward } from "react-icons/io";
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useNavigate } from 'react-router-dom';
 
-const CrewSlider = ({ cast }) => {
+const KnownForSlider = ({ knownFor }) => {
+  const navigate = useNavigate();
+  const mediaType = localStorage.getItem('type');
   return (
-    <div className="mt-12 px-6">
+    <div className="mt-8 bg-white/20 px-6 pt-4 pb-10">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Crew</h2>
+        <h2 className="text-xl font-semibold">known For</h2>
         <div className="flex gap-2">
           <button
-            className="cast-prev2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
+            className="knownFor-prev p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
             aria-label="Previous"
           >
             <FaChevronLeft />
           </button>
           <button
-            className="cast-next2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
+            className="knownFor-next p-2 bg-white/10 hover:bg-white/20 text-white rounded-full cursor-pointer"
             aria-label="Next"
           >
             <FaChevronRight />
@@ -31,35 +34,36 @@ const CrewSlider = ({ cast }) => {
         <Swiper
           modules={[Navigation]}
           navigation={{
-            nextEl: '.cast-next2',
-            prevEl: '.cast-prev2',
+            nextEl: '.knownFor-next',
+            prevEl: '.knownFor-prev',
           }}
           spaceBetween={20}
           slidesOffsetBefore={0}
           slidesOffsetAfter={0}
+          watchOverflow={true}
           breakpoints={{
             320: {
-              slidesPerView: cast.length < 2 ? cast.length : 2,
+              slidesPerView: knownFor.length < 2 ? knownFor.length : 2,
             },
             640: {
-              slidesPerView: cast.length < 3 ? cast.length : 3,
+              slidesPerView: knownFor.length < 3 ? knownFor.length : 3,
             },
             768: {
-              slidesPerView: cast.length < 4 ? cast.length : 4,
+              slidesPerView: knownFor.length < 4 ? knownFor.length : 4,
             },
             1024: {
-              slidesPerView: cast.length < 6 ? cast.length : 6,
+              slidesPerView: knownFor.length < 6 ? knownFor.length : 6,
             },
           }}
         >
-          {cast?.map((person) => (
+          {knownFor?.map((person) => (
             <SwiperSlide key={person.id}>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center cursor-pointer" onClick={()=>navigate(`/${person?.media_type}/details/${person?.id}`)}>
                 <div className="w-30 h-30 md:w-40 md:h-40 rounded-full overflow-hidden mb-2 border-2 border-white shadow">
-                  {person.profile_path ? (
+                  {person.poster_path ? (
                     <img
-                      src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
-                      alt={person.name}
+                      src={`https://image.tmdb.org/t/p/w185${person?.poster_path}`}
+                      alt={person?.name}
                       className="object-cover w-full h-full"
                     />
                   ) : (
@@ -83,4 +87,4 @@ const CrewSlider = ({ cast }) => {
   );
 };
 
-export default CrewSlider;
+export default KnownForSlider;
