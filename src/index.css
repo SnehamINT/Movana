@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* :root {
+  --color-green-400: #11cd99;
+  --color-green-500: #11cd99;
+} */
+
 
 body {
   font-family: 'Inter', 'sans-serif';
@@ -69,8 +74,12 @@ body {
   left: 15px;
 }
 .logo_txt {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 800;
+  /* color: var(--color-green-400); */
+}
+.logo_txt img {
+  width: 35px;
 }
 .search_bar input {
   width: 100%;
