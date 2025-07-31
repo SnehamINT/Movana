@@ -63,7 +63,7 @@ const ContentDetails = () => {
                 <li style={{opacity: '0.7'}}>{details?.title ? details?.title : details?.name}</li>
             </ul>
             </div>
-            <Link className="text-xl logo_txt ps-0 text-white" to="/">Movana</Link>
+            <Link className="text-xl logo_txt ps-0 text-white flex items-center" to="/"><img src="/cineveda_icon.png" alt="" className='me-2' />Cine<span className='text-green-400'>Veda</span></Link>
         </div>
       {/* Main Details Section */}
       <div className="flex flex-col md:flex-row gap-8 items-start lg:items-start px-6">

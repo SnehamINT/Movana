@@ -76,7 +76,7 @@ const Header = ({ type = 'movie', onNavClick = () => {} }) => {
                 {/* <li><a>Movies</a></li> */}
             </ul>
             </div>
-            <a className="btn btn-ghost text-xl logo_txt" href="/"><img src="./cineveda_icon.png" alt="" />CineVeda</a>
+            <a className="flex  items-center text-xl logo_txt" href="/"><img src="/cineveda_icon.png" alt="" className='me-2' />Cine<span className='text-green-400'>Veda</span></a>
         </div>
         <div className="navbar-center hidden lg:block">
         <nav className="flex gap-8 text-lg font-medium">

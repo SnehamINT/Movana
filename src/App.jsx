@@ -6,12 +6,14 @@ import ListingPage from './pages/ListingPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import ContentDetails from './pages/ContentDetails';
 import PersonDetails from './pages/PersonDeatils';
+import Login from './pages/auth/Login';
 // import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/:mediaType/all" element={<ListingPage />} />
       <Route path="/search/:type/:query" element={<SearchResultsPage />} />
 

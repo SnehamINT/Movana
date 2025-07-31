@@ -4,14 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --color-green-400: #11cd99;
-  --color-green-500: #11cd99;
-} */
+:root {
+  --color-primary: #05df72;
+}
 
 
 body {
   font-family: 'Inter', 'sans-serif';
+}
+
+button {
+  cursor: pointer;
 }
 
 .slick-slide {
